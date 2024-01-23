@@ -1,0 +1,21 @@
+{
+  "name": "git-markdown-preview",
+  "version": "1.0.0",
+  "description": "\"An offline package which gives you a preview of Github markdown before commiting\"",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Balachander Palepu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "http": "^0.0.1-security",
+    "markdown-it": "^14.0.0",
+    "marked": "^11.1.1",
+    "node": "^21.2.0",
+    "nodemon": "^3.0.2",
+    "socket.io": "^4.7.4"
+  }
+}
