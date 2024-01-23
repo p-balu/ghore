@@ -30,7 +30,7 @@ fs.watchFile("README.md", (eventType, filename) => {
         console.error(err);
         return;
       }
-      io.emit('updateMarkdown', md.render(data));
+      io.emit('update markdown', md.render(data));
     });
   }
 });
@@ -44,7 +44,7 @@ const renderHTML = (markdown) => {
         <script>
           const socket = io();
 
-          socket.on('updateMarkdown', function(markdown) {
+          socket.on('update markdown', function(markdown) {
             document.getElementById('content').innerHTML = markdown;
           });
         </script>
