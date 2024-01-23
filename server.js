@@ -11,6 +11,7 @@ const io = socketIo(server);
 
 app.use(express.static("public"));
 
+// Route to serve the main page
 app.get("/", (req, res) => {
   fs.readFile("README.md", "utf8", (err, data) => {
     if (err) {
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
   });
 });
 
+//watching file for changes
 fs.watchFile("README.md", (eventType, filename) => {
   console.log("Applying changes....")
   if (filename) {
@@ -35,6 +37,7 @@ fs.watchFile("README.md", (eventType, filename) => {
   }
 });
 
+//Html rendering
 const renderHTML = (markdown) => {
   return `<!DOCTYPE html>
     <html>
@@ -58,6 +61,8 @@ const renderHTML = (markdown) => {
 };
 
 const port = 7878;
+
+//listening server on port 7878
 server.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });
