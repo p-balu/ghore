@@ -4,18 +4,22 @@
   "description": "\"An offline package which gives you a preview of Github markdown before commiting\"",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon server.js start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Balachander Palepu",
   "license": "ISC",
   "dependencies": {
+    "@wooorm/starry-night": "^3.2.0",
+    "chokidar": "^3.5.3",
     "express": "^4.18.2",
+    "hast-util-to-html": "^9.0.0",
     "http": "^0.0.1-security",
     "markdown-it": "^14.0.0",
-    "marked": "^11.1.1",
+    "mermaid": "^10.7.0",
     "node": "^21.2.0",
     "nodemon": "^3.0.2",
     "socket.io": "^4.7.4"
-  }
+  },
+  "keywords": []
 }
