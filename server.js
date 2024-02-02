@@ -2,9 +2,10 @@
 const fs = require("fs");
 const express = require("express");
 const http = require("http");
-const MarkdownIt = require("markdown-it");
 const socketIo = require("socket.io");
 const chokidar = require("chokidar");
+const cmarkGfm = require("cmark-gfm");
+const { JSDOM } = require("jsdom");
 
 const app = express();
 const server = http.createServer(app);
@@ -20,80 +21,108 @@ const path =
     : defaultFilePath;
 
 console.log("path", path);
-app.use("/node_modules", express.static(__dirname + "/node_modules"));
-app.use(express.static("public")); // Serve static files efficiently
 
-// Load and initialize Starry Night and MarkdownIt
-async function initializeMarkdown() {
+// Serve static files
+app.use("/node_modules", express.static(__dirname + "/node_modules"));
+app.use(express.static("public"));
+
+const renderMarkdown = async (data) => {
+  // Converting Markdown to HTML using cmark-gfm
+  const html = await cmarkGfm.renderHtml(data);
+
+  // Create a JSDOM instance from the HTML output
+  const dom = new JSDOM(html);
+  const document = dom.window.document;
+
+  // Finding  all code blocks
+  const codeBlocks = document.querySelectorAll("code");
+
+  //syntax highlighting to each code block
+  for (const block of codeBlocks) {
+    const lang = block.className.split("language-")[1]; // as the language class follows this pattern
+    if (lang) {
+      const highlighted = await highlightCode(lang, block.textContent);
+      block.innerHTML = highlighted; // Replace the inner HTML of the code block
+    }
+  }
+
+  // updated HTML
+  return dom.serialize();
+};
+
+//highlighting code by integrating both Starry night and mermaid
+const highlightCode = async (lang, str) => {
   const { createStarryNight, common } = await import("@wooorm/starry-night");
-  const starryNight = await createStarryNight(common);
+  const sourceCss = await import("@wooorm/starry-night/source.css");
+
+  const starryNight = await createStarryNight(common, [sourceCss]);
   const { toHtml } = await import("hast-util-to-html");
 
-  const mdInstance = new MarkdownIt({
-    highlight: function (str, lang) {
-      if (lang === "mermaid") {
-        return `<div class="mermaid">${str}</div>`; // Mermaid diagrams
-      } else if (lang && starryNight.flagToScope(lang)) {
-        const scope = starryNight.flagToScope(lang);
-        try {
-          const tree = starryNight.highlight(str, scope);
-          return `<pre class="hljs"><code>${toHtml(tree)}</code></pre>`;
-        } catch (error) {
-          console.error(error);
-          return "";
-        }
-      }
-      return `<pre class="hljs"><code>${mdInstance.utils.escapeHtml(
-        str
-      )}</code></pre>`;
-    },
-  });
-
-  return mdInstance;
-}
+  if (lang === "mermaid") {
+    return `<div class="mermaid">${str}</div>`; // Mermaid diagrams
+  } else if (lang && starryNight.flagToScope(lang)) {
+    try {
+      const highlighted = starryNight.highlight(
+        str,
+        starryNight.flagToScope(lang)
+      );
+      return `<pre class="hljs"><code>${toHtml(highlighted)}</code></pre>`;
+    } catch (error) {
+      console.error("Error highlighting code:", error);
+      return `<pre class="hljs"><code>${str}</code></pre>`; // Fallback to simple highlighting
+    }
+  } else {
+    return `<pre class="hljs"><code>${str}</code></pre>`; // Default highlighting
+  }
+};
 
 // Setup Markdown rendering and file watching
-initializeMarkdown().then((md) => {
-  app.get("/", (req, res) => {
-    fs.readFile(path, "utf8", (err, data) => {
-      if (err) {
-        console.error(err);
-        res
-          .status(500)
-          .send("Error loading file. No file name README.md found");
-        return;
-      }
-      res.send(renderHTML(md.render(data)));
-    });
-  });
+app.get("/", async (req, res) => {
+  try {
+    const data = await fs.promises.readFile(path, "utf8");
 
-  //file watch
-  chokidar.watch(path).on("change", () => {
-    fs.readFile(path, "utf8", (err, data) => {
-      console.log("File change detected!!! Applying changes to the page...");
-      if (err) {
-        console.error(err);
-        return;
-      }
-      io.emit("update markdown", md.render(data));
-    });
-  });
+    const renderedHTML = await renderMarkdown(data); // Assuming renderMarkdown is asynchronous
+
+    res.send(renderHTML(renderedHTML));
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .send(
+        "Error loading file, Please specify path of README.md file along with the start command"
+      );
+  }
 });
 
+chokidar.watch(path).on("change", async () => {
+  try {
+    const data = await fs.promises.readFile(path, "utf8");
+    console.log("File has been changed!!! Applying changes....");
+    const renderedHTML = await renderMarkdown(data); // Assuming renderMarkdown is asynchronous
+
+    io.emit("update markdown", renderedHTML);
+  } catch (err) {
+    console.error("file watch error:", err);
+  }
+});
 // Render HTML template
 const renderHTML = (markdown) => `<!DOCTYPE html>
 <html>
 <head>
+  <title>README.md</title>
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/node_modules/@wooorm/starry-night/dist/index.css">
   <script src="/socket.io/socket.io.js"></script>
-  <script src="node_modules/mermaid/dist/mermaid.min.js"></script>  
-  <script>
+  <script src="/node_modules/mermaid/dist/mermaid.min.js"></script>
+    <script>
     const socket = io();
 
     socket.on('update markdown', function(markdown) {
       document.getElementById('content').innerHTML = markdown;
-      //Reinitializing mermaid 
-      mermaid.init(undefined, content.querySelectorAll('.mermaid'));      });
+      // Reinitializing mermaid 
+      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+    });
+    
   </script>
   <script>mermaid.initialize({startOnLoad:true});</script>
 </head>
