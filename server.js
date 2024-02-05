@@ -39,10 +39,12 @@ const renderMarkdown = async (data) => {
 
   //syntax highlighting to each code block
   for (const block of codeBlocks) {
-    const lang = block.className.split("language-")[1]; // as the language class follows this pattern
+    //language class follows this pattern
+    const lang = block.className.split("language-")[1]; 
     if (lang) {
       const highlighted = await highlightCode(lang, block.textContent);
-      block.innerHTML = highlighted; // Replace the inner HTML of the code block
+      // Replacing the inner HTML of the code block
+      block.innerHTML = highlighted; 
     }
   }
 
@@ -59,7 +61,8 @@ const highlightCode = async (lang, str) => {
   const { toHtml } = await import("hast-util-to-html");
 
   if (lang === "mermaid") {
-    return `<div class="mermaid">${str}</div>`; // Mermaid diagrams
+    // Mermaid diagrams
+    return `<div class="mermaid">${str}</div>`; 
   } else if (lang && starryNight.flagToScope(lang)) {
     try {
       const highlighted = starryNight.highlight(
@@ -69,10 +72,12 @@ const highlightCode = async (lang, str) => {
       return `<pre class="hljs"><code>${toHtml(highlighted)}</code></pre>`;
     } catch (error) {
       console.error("Error highlighting code:", error);
-      return `<pre class="hljs"><code>${str}</code></pre>`; // Fallback to simple highlighting
+       // Fallback to simple highlighting
+      return `<pre class="hljs"><code>${str}</code></pre>`;
     }
   } else {
-    return `<pre class="hljs"><code>${str}</code></pre>`; // Default highlighting
+    // Default highlighting
+    return `<pre class="hljs"><code>${str}</code></pre>`; 
   }
 };
 
@@ -81,8 +86,7 @@ app.get("/", async (req, res) => {
   try {
     const data = await fs.promises.readFile(path, "utf8");
 
-    const renderedHTML = await renderMarkdown(data); // Assuming renderMarkdown is asynchronous
-
+    const renderedHTML = await renderMarkdown(data); 
     res.send(renderHTML(renderedHTML));
   } catch (err) {
     console.error(err);
@@ -94,11 +98,12 @@ app.get("/", async (req, res) => {
   }
 });
 
+//file watch
 chokidar.watch(path).on("change", async () => {
   try {
     const data = await fs.promises.readFile(path, "utf8");
     console.log("File has been changed!!! Applying changes....");
-    const renderedHTML = await renderMarkdown(data); // Assuming renderMarkdown is asynchronous
+    const renderedHTML = await renderMarkdown(data);
 
     io.emit("update markdown", renderedHTML);
   } catch (err) {
@@ -131,6 +136,7 @@ const renderHTML = (markdown) => `<!DOCTYPE html>
 </body>
 </html>`;
 
+//server
 const port = 7878;
 server.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
