@@ -36,7 +36,6 @@ npm install
 
 #To start the application locally
 npm start `your/filepath/README.md`
-
 ```
 
 ## Installing `package using npm` globally

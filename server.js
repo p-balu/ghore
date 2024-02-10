@@ -82,7 +82,7 @@ const renderHTML = (markdown) => `<!DOCTYPE html>
   <script>mermaid.initialize({startOnLoad:true});</script>
 </head>
 <body>
-  <h3 class="header">README.md</h3>
+  <h3 class="header">README</h3>
   <article class="markdown-body" id="content">${markdown}</article>
 </body>
 </html>`;

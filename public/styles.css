@@ -4,8 +4,9 @@
 */
 
 .header {
-  display: flex;
-  justify-content: center;
+  margin: 0 auto;
+  min-width: 220px;
+  max-width: 1040px;
   margin-top: 2%;
 }
 .markdown-body {
@@ -22,8 +23,8 @@
   margin: 0 auto;
   margin-top: 1%;
   padding: 40px;
-  min-width: 150px;
-  max-width: 1100px;
+  min-width: 250px;
+  max-width: 980px;
   border: 1px solid #ccc;
   border-radius: 8px;
   margin-bottom: 3%;
@@ -71,7 +72,6 @@
 .markdown-body a {
   background-color: transparent;
   color: #0969da;
-  text-decoration: none;
 }
 
 .markdown-body abbr[title] {
@@ -768,7 +768,7 @@
 
 .markdown-body .highlight pre,
 .markdown-body pre {
-  padding: 16px;
+  padding: 8px;
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
