@@ -7,7 +7,7 @@
 - [Installation](#installation)
 - [Installing `package using npm` globally](#installing-package-using-npm-globally)
 - [Configuration](#configuration)
-- [Contribution](#contribution)
+- [Contributing](#contributing)
 - [License](#license)
 
 # What is this?

@@ -72,7 +72,6 @@ const renderHTML = (markdown) => `<!DOCTYPE html>
       // Reinitializing mermaid 
       mermaid.init(undefined, document.querySelectorAll('.mermaid'));
     });
-    
   </script>
   <script>
   window.addEventListener("scroll", (event) => {

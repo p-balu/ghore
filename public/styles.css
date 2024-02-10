@@ -6,7 +6,7 @@
 .header {
   margin: 0 auto;
   min-width: 220px;
-  max-width: 1040px;
+  max-width: 960px;
   margin-top: 2%;
 }
 .markdown-body {
@@ -23,8 +23,8 @@
   margin: 0 auto;
   margin-top: 1%;
   padding: 40px;
-  min-width: 250px;
-  max-width: 980px;
+  min-width: 220px;
+  max-width: 900px;
   border: 1px solid #ccc;
   border-radius: 8px;
   margin-bottom: 3%;
