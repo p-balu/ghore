@@ -7,7 +7,7 @@
   "description": "\"An offline package which gives you a preview of Github markdown before commiting\"",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js start",
+    "start": "node server.js start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Balachander Palepu",
