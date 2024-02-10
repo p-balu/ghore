@@ -1,6 +1,6 @@
 {
   "name": "git-markdown-preview",
-  "version": "1.2.2",
+  "version": "1.0.1",
   "bin": {
     "git-markdown": "cli.js"
   },

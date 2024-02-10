@@ -3,6 +3,11 @@
    sindresorhus/github-markdown-css
 */
 
+.header {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
 .markdown-body {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -15,12 +20,13 @@
   line-height: 1.5;
   word-wrap: break-word;
   margin: 0 auto;
-  margin-top: 5%;
-  padding: 20px;
+  margin-top: 1%;
+  padding: 40px;
   min-width: 150px;
   max-width: 1100px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
+  margin-bottom: 3%;
 }
 
 .anchorLinks {
@@ -437,12 +443,15 @@
 .markdown-body ol,
 .markdown-body dl,
 .markdown-body table,
-.markdown-body pre,
 .markdown-body details {
   margin-top: 0;
   margin-bottom: 16px;
 }
 
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 .markdown-body blockquote > :first-child {
   margin-top: 0;
 }
