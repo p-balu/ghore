@@ -26,7 +26,6 @@ const renderMarkdown = async (data) => {
   for (const block of codeBlocks) {
     const lang = block.className.split("language-")[1];
     if (lang) {
-      // Update the path accordingly
       const highlighted = await highlightCode(lang, block.textContent);
       block.innerHTML = highlighted;
     }
@@ -41,7 +40,8 @@ const highlightCode = async (lang, str) => {
   const sourceCss = await import("@wooorm/starry-night/source.css");
   const starryNight = await createStarryNight(common, [sourceCss]);
   const { toHtml } = await import("hast-util-to-html");
-
+ 
+  //lang mermaid
   if (lang === "mermaid") {
     return `<div class="mermaid">${str}</div>`;
   } else if (lang && starryNight.flagToScope(lang)) {
