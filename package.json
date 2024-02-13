@@ -26,6 +26,20 @@
     "path": "^0.12.7",
     "socket.io": "^4.7.4"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/p-balu/git-markdown-preview.git"
+  },
+  "keywords": [
+    "markdown",
+    "markdown-preview",
+    "grip",
+    "git",
+    "git-markdown-preview",
+    "git-markdown",
+    "md-preview",
+    "md-html",
+    "md-to-html"
+  ],
   "devDependencies": {}
 }
