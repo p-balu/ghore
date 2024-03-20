@@ -12,7 +12,7 @@
 
 # What is this?
 
-GitMarkdownPreview is an open-source and offline command-line interface (CLI) application/package designed for converting Markdown files to HTML, GitHub Markdown style. The tool utilizes [cmarkgfm](https://github.com/BinaryMuse/node-cmark-gfm) for robust Markdown parsing, [Starry Night](https://github.com/wooorm/starry-night) for code block highlighting, custom CSS for GitHub-like styling, and supports the display of flowcharts using Mermaid syntax.
+GitMarkdownPreview is an open-source and offline command-line interface (CLI) application/package designed for converting Markdown files to HTML, GitHub Markdown style.
 
 ## Features
 
@@ -51,13 +51,13 @@ npm i git-markdown-preview -g
 If you are already inside the directory where README.md file exists then run
 
 ```bash
-git-markdown
+gmark preview
 ```
 
 #### or
 
 ```sh
-git-markdown /path/toyour/README.md
+gmark preview /path/toyour/README.md
 ```
 
 ## Configuration

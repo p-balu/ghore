@@ -16,14 +16,17 @@ const io = socketIo(server);
 const defaultFilePath = "README.md";
 
 // Default port
-const port = 5149;
+const port = 5169;
 
 const path = process.argv[3] || defaultFilePath;
 console.log("path", path);
 console.log("Server is running on port:", port);
 
 // Serve static files
-app.use("/node_modules", express.static(__dirname + "/node_modules"));
+app.use(
+  "/mermaid.min.js",
+  express.static(__dirname + "/public/lib/mermaid.min.js")
+);
 app.use("/styles.css", express.static(__dirname + "/public/styles.css"));
 app.use(express.static("public"));
 
@@ -61,27 +64,20 @@ const renderHTML = (markdown) => `<!DOCTYPE html>
 <head>
   <title>README.md</title>
   <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/node_modules/@wooorm/starry-night/dist/index.css">
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/node_modules/mermaid/dist/mermaid.min.js"></script>
+  <script src="/mermaid.min.js"></script>
     <script>
     const socket = io();
 
     socket.on('update markdown', function(markdown) {
       document.getElementById('content').innerHTML = markdown;
       // Reinitializing mermaid 
-      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+      mermaid.run(undefined, document.querySelectorAll('.mermaid'));
     });
   </script>
-  <script>
-  window.addEventListener("scroll", (event) => {
-    window.scrollY;
-  });
-  </script>
-  <script>mermaid.initialize({startOnLoad:true});</script>
+  <script>mermaid.run();</script>
 </head>
 <body>
-  <h3 class="header">README</h3>
   <article class="markdown-body" id="content">${markdown}</article>
 </body>
 </html>`;

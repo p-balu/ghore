@@ -1,7 +1,22 @@
 const { JSDOM } = require("jsdom");
 const cmarkGfm = require("cmark-gfm");
 
+// Defining variables to store the Starry Night and related modules
+let starryNight = null;
+let toHtml = null;
+
+// Initializing Starry Night libraries once and store them
+const initializeStarryNight = async () => {
+  if (!starryNight || !toHtml) {
+    const { createStarryNight, common } = await import("@wooorm/starry-night");
+    const sourceCss = await import("@wooorm/starry-night/source.css");
+    starryNight = await createStarryNight(common, [sourceCss]);
+    ({ toHtml } = await import("hast-util-to-html"));
+  }
+};
+
 const renderMarkdown = async (data) => {
+  await initializeStarryNight();
   const html = await cmarkGfm.renderHtml(data);
 
   const dom = new JSDOM(html);
@@ -36,11 +51,10 @@ const renderMarkdown = async (data) => {
 
 // Highlight code blocks function
 const highlightCode = async (lang, str) => {
-  const { createStarryNight, common } = await import("@wooorm/starry-night");
-  const sourceCss = await import("@wooorm/starry-night/source.css");
-  const starryNight = await createStarryNight(common, [sourceCss]);
-  const { toHtml } = await import("hast-util-to-html");
- 
+  if (!starryNight || !toHtml) {
+    await initializeStarryNight();
+  }
+
   //lang mermaid
   if (lang === "mermaid") {
     return `<div class="mermaid">${str}</div>`;
