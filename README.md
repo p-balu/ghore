@@ -18,7 +18,6 @@ Hey, I am currently open to new work opportunities, you can find my resume [here
 
 Ghore is an open-source, offline command-line interface (CLI) tool specifically designed for developers and writers working with GitHub. Its primary function is to render Markdown files into HTML, closely emulating the GitHub Markdown style. This enables users to preview how their Markdown documents will look on GitHub before committing them to a repository.
 
-
 ## Features
 
 - **Offline Conversion:** Convert Markdown files to HTML offline without the need for an internet connection.
@@ -27,6 +26,9 @@ Ghore is an open-source, offline command-line interface (CLI) tool specifically 
 - **Code Block Highlighting:** Integrated [Starry Night](https://github.com/your-username/starry-night) ensures beautiful and syntax-highlighted code blocks.
 - **Flowchart Support:** It also supports live preview of mermaid code blocks (Github's API doesn't process mermaid codeblocks).
 
+## `Requirements`
+
+Requires the latest version of nodejs 20.10.0 or above.
 
 ## `Installation`
 
