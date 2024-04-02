@@ -1,8 +1,8 @@
-Hey, I am currently open to new work opportunities, you can find my resume [here](https://github.com/p-balu/resume/blob/main/resume_balachander-4.pdf)
+Hey, I am currently open to new work opportunities, you can find my resume [here](https://github.com/p-balu/resume/blob/main/resume_balachander-4.pdf?raw=true)
 
 # Gore (GitHub offline renderer)
 
-![alt text]("")
+![alt text]("https://github.com/p-balu/gore/blob/master/public/assets/Screenshot.png?raw=true")
 
 ## Content
 
