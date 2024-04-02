@@ -2,6 +2,8 @@ Hey, I am currently open to new work opportunities, you can find my resume [here
 
 # Gore (GitHub offline renderer)
 
+![alt text]("")
+
 ## Content
 
 - [What is this?](#what-is-this)
