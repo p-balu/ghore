@@ -2,7 +2,7 @@ Hey, I am currently open to new work opportunities, you can find my resume [here
 
 # Ghore (GitHub offline renderer)
 
-![alt text]("https://github.com/p-balu/ghore/blob/master/public/assets/Screenshot.png?raw=true)
+![alt text]("https://github.com/p-balu/ghore/blob/master/public/assets/Screenshot.png)
 
 ## Content
 
