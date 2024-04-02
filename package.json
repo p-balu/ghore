@@ -1,12 +1,12 @@
 {
-  "name": "gore",
+  "name": "ghore",
   "version": "1.0.1",
   "bin": {
-    "gore": "cli.js"
+    "ghore": "cli.js"
   },
   "oclif": {
     "commands": "./src/commands",
-    "bin": "gore",
+    "bin": "ghore",
     "plugins": [
       "@oclif/plugin-help"
     ]
@@ -37,21 +37,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/p-balu/gore.git"
+    "url": "git+https://github.com/p-balu/ghore.git"
   },
   "keywords": [
     "markdown",
     "markdown-preview",
     "grip",
     "git",
-    "gore",
+    "ghore",
     "git-markdown",
     "md-preview",
     "md-html",
     "md-to-html"
   ],
   "bugs": {
-    "url": "https://github.com/p-balu/gore/issues"
+    "url": "https://github.com/p-balu/ghore/issues"
   },
-  "homepage": "https://github.com/p-balu/gore#readme"
+  "homepage": "https://github.com/p-balu/ghore#readme"
 }
