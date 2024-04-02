@@ -1,12 +1,12 @@
 {
-  "name": "git-markdown-preview",
-  "version": "2.0.1",
+  "name": "gore",
+  "version": "1.0.1",
   "bin": {
-    "gmark": "cli.js"
+    "gore": "cli.js"
   },
   "oclif": {
     "commands": "./src/commands",
-    "bin": "gmark",
+    "bin": "gore",
     "plugins": [
       "@oclif/plugin-help"
     ]
@@ -37,22 +37,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/p-balu/git-markdown-preview.git"
+    "url": "git+https://github.com/p-balu/gore.git"
   },
   "keywords": [
     "markdown",
     "markdown-preview",
     "grip",
     "git",
-    "git-markdown-preview",
+    "gore",
     "git-markdown",
     "md-preview",
     "md-html",
     "md-to-html"
   ],
   "bugs": {
-    "url": "https://github.com/p-balu/git-markdown-preview/issues"
+    "url": "https://github.com/p-balu/gore/issues"
   },
-  "homepage": "https://github.com/p-balu/git-markdown-preview#readme",
-  "devDependencies": {}
+  "homepage": "https://github.com/p-balu/gore#readme"
 }

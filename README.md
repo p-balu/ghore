@@ -1,4 +1,6 @@
-# Git-Markdown-Preview
+Hey, I am currently open to new work opportunities, you can find my resume [here](https://github.com/p-balu/resume/blob/main/resume_balachander-4.pdf)
+
+# Gore (GitHub offline renderer)
 
 ## Content
 
@@ -12,7 +14,7 @@
 
 # What is this?
 
-GitMarkdownPreview is an open-source and offline command-line interface (CLI) application/package designed for converting Markdown files to HTML, GitHub Markdown style.
+Gore is an open-source and offline command-line interface (CLI) application/package designed for converting Markdown files to HTML, GitHub Markdown style.
 
 ## Features
 
@@ -26,10 +28,10 @@ GitMarkdownPreview is an open-source and offline command-line interface (CLI) ap
 
 ```bash
 # Clone the repository
-git clone https://github.com/p-balu/git-markdown-preview.git
+git clone https://github.com/p-balu/gore.git
 
 # Navigate to the project directory
-cd git-markdown-preview
+cd gore
 
 # Install dependencies
 npm install
@@ -43,7 +45,7 @@ npm start `your/filepath/README.md`
 Install the package globally
 
 ```sh
-npm i git-markdown-preview -g
+npm i gore -g
 ```
 
 ### Start the application in 2 different ways
@@ -51,13 +53,13 @@ npm i git-markdown-preview -g
 If you are already inside the directory where README.md file exists then run
 
 ```bash
-gmark preview
+gore preview
 ```
 
 #### or
 
 ```sh
-gmark preview /path/toyour/README.md
+gore preview /path/toyour/README.md
 ```
 
 ## Configuration
