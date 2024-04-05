@@ -51,7 +51,7 @@ const highlightCode = async (lang, str) => {
   }
 ```
 
-Below mermaid block will be diplayed
+Below mermaid block will be displayed
 
 ````code
 ```mermaid
