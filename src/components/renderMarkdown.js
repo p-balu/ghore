@@ -36,13 +36,20 @@ const renderMarkdown = async (data) => {
     heading.id = anchorId;
   });
 
-  // Highlight code blocks
+  // Highlight code blocks and replacing the original nodes
   const codeBlocks = document.querySelectorAll("code");
   for (const block of codeBlocks) {
     const lang = block.className.split("language-")[1];
     if (lang) {
-      const highlighted = await highlightCode(lang, block.textContent);
-      block.innerHTML = highlighted;
+      const highlightedHtml = await highlightCode(lang, block.textContent);
+
+      // Creating a new wrapper for the highlighted code
+      const wrapperDiv = document.createElement("div");
+      wrapperDiv.className = `language-${lang}`;
+      wrapperDiv.innerHTML = highlightedHtml;
+
+      // Replacing the original code block with the new wrapper
+      block.parentNode.replaceChild(wrapperDiv, block);
     }
   }
 
@@ -64,13 +71,16 @@ const highlightCode = async (lang, str) => {
         str,
         starryNight.flagToScope(lang)
       );
-      return `<pre class="hljs"><code>${toHtml(highlighted)}</code></pre>`;
+      // Directly return highlighted code without wrapping it in <pre> and <code> here
+      return toHtml(highlighted);
     } catch (error) {
       console.error("Error highlighting code:", error);
-      return `<pre class="hljs"><code>${str}</code></pre>`;
+      // In case of an error, still do not wrap in <pre> and <code>
+      return str;
     }
   } else {
-    return `<pre class="hljs"><code>${str}</code></pre>`;
+    // For unspecified languages, consider wrapping as per your default style
+    return str;
   }
 };
 

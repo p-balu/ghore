@@ -874,8 +874,8 @@
 .markdown-body .highlight pre,
 .markdown-body pre {
   padding: 16px;
-  padding-top: 8.2px;
-  padding-bottom: 0;
+  /* padding-top: 8.2px;
+  padding-bottom: 0; */
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;

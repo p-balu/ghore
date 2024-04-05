@@ -19,7 +19,7 @@ const defaultFilePath = "README.md";
 const port = 5169;
 
 const path = process.argv[3] || defaultFilePath;
-console.log("path", path);
+
 console.log("Server is running on port:", port);
 
 // Serve static files

@@ -8,6 +8,8 @@ Hey, I am currently open to new work opportunities, you can find my resume [here
 
 - [What is this?](#what-is-this)
 - [Features](#features)
+- [Examples](#examples)
+- [Requirements](#requirements)
 - [Installation](#installation)
 - [Installing `package using npm` globally](#installing-package-using-npm-globally)
 - [Configuration](#configuration)
@@ -25,6 +27,67 @@ Ghore is an open-source, offline command-line interface (CLI) tool specifically 
 - **GitHub Styling:** HTML output mirrors the GitHub Markdown style for consistency.
 - **Code Block Highlighting:** Integrated [Starry Night](https://github.com/your-username/starry-night) ensures beautiful and syntax-highlighted code blocks.
 - **Flowchart Support:** It also supports live preview of mermaid code blocks (Github's API doesn't process mermaid codeblocks).
+
+## `Examples`
+
+Highlights the below code block function using integrated [Starry Night](https://github.com/your-username/starry-night)
+
+````code
+    ```sh
+    // Highlight code blocks function
+const highlightCode = async (lang, str) => {
+  if (!starryNight || !toHtml) {
+    await initializeStarryNight();
+  }
+    ```
+````
+
+#### like this
+
+```sh
+const highlightCode = async (lang, str) => {
+  if (!starryNight || !toHtml) {
+    await initializeStarryNight();
+  }
+```
+
+Below mermaid block will be diplayed
+
+````code
+```mermaid
+gitGraph:
+    commit "test"
+    branch newbranch
+    checkout newbranch
+    commit id:"1111"
+    commit tag:"test"
+    checkout main
+    commit type: HIGHLIGHT
+    commit
+    merge newbranch
+    commit
+    branch b2
+    commit
+```
+````
+
+#### like this
+
+```mermaid
+gitGraph:
+    commit "changes"
+    branch newbranch
+    checkout newbranch
+    commit id:"1111"
+    commit tag:"test"
+    checkout main
+    commit type: HIGHLIGHT
+    commit
+    merge newbranch
+    commit
+    branch b2
+    commit
+```
 
 ## `Requirements`
 
