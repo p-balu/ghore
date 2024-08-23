@@ -18,7 +18,7 @@ const defaultFilePath = "README.md";
 // Default port
 const port = 5169;
 
-const path = process.argv[3] || defaultFilePath;
+const path = process.argv[2] || defaultFilePath;
 
 console.log("Server is running on port:", port);
 
