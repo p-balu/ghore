@@ -13,6 +13,9 @@
   },
   "description": "\"An offline package which gives you a preview of Github markdown before commiting\"",
   "main": "index.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "start": "nodemon server.js",
     "preview": "oclif preview",
@@ -21,19 +24,18 @@
   "author": "Balachander Palepu",
   "license": "MIT",
   "dependencies": {
-    "@oclif/core": "^4.0.23",
-    "@wooorm/starry-night": "^3.5.0",
-    "chokidar": "^4.0.1",
+    "@oclif/core": "^4.11.3",
+    "@oclif/plugin-help": "^5.0.0",
+    "@wooorm/starry-night": "^3.9.0",
+    "chokidar": "^4.0.3",
     "cmark-gfm": "^0.9.0",
-    "express": "^4.21.0",
-    "hast-util-to-html": "^9.0.3",
-    "http": "^0.0.1-security",
+    "express": "^4.22.2",
+    "hast-util-to-html": "^9.0.5",
     "jsdom": "^25.0.1",
-    "mermaid": "^11.2.1",
-    "node": "^22.9.0",
-    "nodemon": "^3.1.7",
-    "path": "^0.12.7",
-    "socket.io": "^4.8.0"
+    "mermaid": "^11.15.0",
+    "nodemon": "^3.1.14",
+    "open": "^9.1.0",
+    "socket.io": "^4.8.3"
   },
   "repository": {
     "type": "git",

@@ -11,7 +11,8 @@ Hey, I am currently open to new work opportunities, you can find my resume [here
 - [Examples](#examples)
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Installing `package using npm` globally](#installing-package-using-npm-globally)
+- [Installing package using npm globally](#installing-package-using-npm-globally)
+- [Multiple instances](#multiple-instances)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
@@ -25,12 +26,15 @@ Ghore is an open-source, offline command-line interface (CLI) tool specifically 
 - **Offline Conversion:** Convert Markdown files to HTML offline without the need for an internet connection.
 - **Watch for Changes:** Automatically update the HTML output when changes are made to the input Markdown file.
 - **GitHub Styling:** HTML output mirrors the GitHub Markdown style for consistency.
-- **Code Block Highlighting:** Integrated [Starry Night](https://github.com/your-username/starry-night) ensures beautiful and syntax-highlighted code blocks.
-- **Flowchart Support:** It also supports live preview of mermaid code blocks (Github's API doesn't process mermaid codeblocks).
+- **Code Block Highlighting:** Integrated [Starry Night](https://github.com/wooorm/starry-night) ensures beautiful and syntax-highlighted code blocks.
+- **Flowchart Support:** Live preview of mermaid code blocks (GitHub's API doesn't process mermaid code blocks).
+- **Auto-open Browser:** Automatically opens the preview in your default browser when the server starts.
+- **Multiple Instances:** Run several previews at once — each instance gets its own port automatically selected from the range `5169–5200`.
+- **Instance Tracking:** Active instances are logged to a shared file in a temporary directory, showing which file is served at which URL.
 
 ## `Examples`
 
-Highlights the below code block function using integrated [Starry Night](https://github.com/your-username/starry-night)
+Highlights the below code block function using integrated [Starry Night](https://github.com/wooorm/starry-night)
 
 ````code
     ```sh
@@ -91,7 +95,7 @@ gitGraph:
 
 ## `Requirements`
 
-Requires the latest version of nodejs 20.10.0 or above.
+Node.js 18.0.0 or above.
 
 ## `Installation`
 
@@ -105,8 +109,8 @@ cd ghore
 # Install dependencies
 npm install
 
-#To start the application locally
-npm start `your/filepath/README.md`
+# Start the application locally
+npm start your/filepath/README.md
 ```
 
 ## Installing `package using npm` globally
@@ -119,7 +123,7 @@ npm i ghore -g
 
 ### Start the application in 2 different ways
 
-If you are already inside the directory where README.md file exists then run
+If you are already inside the directory where README.md exists, run:
 
 ```bash
 ghore preview
@@ -128,8 +132,37 @@ ghore preview
 #### or
 
 ```sh
-ghore preview /path/toyour/README.md
+ghore preview /path/to/your/README.md
 ```
+
+The preview opens automatically in your default browser.
+
+## Multiple instances
+
+You can run multiple previews at the same time. Each instance picks a free port in the range `5169–5200` automatically:
+
+```bash
+ghore preview README.md &
+ghore preview INSTALL.md &
+ghore preview docs/CHANGELOG.md &
+```
+
+Each instance logs itself to a shared tracking file inside a temporary directory (printed on startup):
+
+```
+Instance list: /tmp/ghore-abc123/instances
+```
+
+The file format is:
+
+```
+PATH; FILE; URL
+/home/user; README.md; http://localhost:5169/
+/home/user; INSTALL.md; http://localhost:5170/
+/home/user/docs; CHANGELOG.md; http://localhost:5171/
+```
+
+When an instance is stopped (`Ctrl+C` or `SIGTERM`), its line is removed automatically.
 
 ## Configuration
 
