@@ -7,7 +7,6 @@ const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
 const chokidar = require("chokidar");
-const open = require("open");
 const renderMarkdown = require("./src/components/renderMarkdown");
 
 const PORT_RANGE_START = 5169;
@@ -153,9 +152,10 @@ const renderHTML = (markdown) => `<!DOCTYPE html>
   process.on("SIGTERM", () => { cleanup(); process.exit(0); });
   process.on("exit", cleanup);
 
-  server.listen(port, () => {
+  server.listen(port, async () => {
     console.log(`Previewing: ${resolvedFile}`);
     console.log(`Server running at ${url}`);
+    const { default: open } = await import("open");
     open(url);
   });
 })();
