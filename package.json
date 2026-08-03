@@ -19,7 +19,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "preview": "oclif preview",
-    "test": "oclif preview"
+    "test": "node --test"
   },
   "author": "Balachander Palepu",
   "license": "MIT",

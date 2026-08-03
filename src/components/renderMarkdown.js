@@ -46,7 +46,19 @@ const renderMarkdown = async (data) => {
       // Creating a new wrapper for the highlighted code
       const wrapperDiv = document.createElement("div");
       wrapperDiv.className = `language-${lang}`;
-      wrapperDiv.innerHTML = highlightedHtml;
+      // Starry Night returns encoded markup, but fallback and Mermaid content
+      // originate in the document. Keep those paths as text so a code fence
+      // can never break out of its preview container.
+      if (lang === "mermaid") {
+        const mermaidDiv = document.createElement("div");
+        mermaidDiv.className = "mermaid";
+        mermaidDiv.textContent = block.textContent;
+        wrapperDiv.appendChild(mermaidDiv);
+      } else if (starryNight.flagToScope(lang)) {
+        wrapperDiv.innerHTML = highlightedHtml;
+      } else {
+        wrapperDiv.textContent = block.textContent;
+      }
 
       // Replacing the original code block with the new wrapper
       block.parentNode.replaceChild(wrapperDiv, block);
@@ -64,7 +76,7 @@ const highlightCode = async (lang, str) => {
 
   //lang mermaid
   if (lang === "mermaid") {
-    return `<div class="mermaid">${str}</div>`;
+    return str;
   } else if (lang && starryNight.flagToScope(lang)) {
     try {
       const highlighted = starryNight.highlight(
